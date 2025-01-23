@@ -1,10 +1,12 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 import ca.mcmaster.se2aa4.mazerunner.MazeRunner.Maze;
 import ca.mcmaster.se2aa4.mazerunner.Solver.MazeExplorer;
+import ca.mcmaster.se2aa4.mazerunner.FormatPath;
 
 public class SimpleSolver {
      public static class SimpleMazeExplorer extends MazeExplorer {
@@ -18,13 +20,17 @@ public class SimpleSolver {
             while (!Arrays.equals(position, maze.getExit())) {
                 // Check if turning right is possible
                 turnRight();
+                path.add('R');
                 if (maze.isWalkable(nextPosition())) {
                     moveForward();
+                    path.add('F');
                 } else {
                     // Restore orientation and try moving forward
                     turnLeft(); // Undo the turnRight
+
                     if (maze.isWalkable(nextPosition())) {
                         moveForward();
+
                     } else {
                         // Check if turning left is possible
                         turnLeft();

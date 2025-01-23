@@ -1,5 +1,7 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
+import java.util.List;
+
 import org.apache.commons.cli.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -32,7 +34,11 @@ public class Main {
             // Process the maze file
             MazeExplorer explorer = new SimpleMazeExplorer(maze);
             explorer.explore();
-            System.out.println("Path found: " + explorer.getPath());
+            List<Character> path = explorer.getPath();
+            FormatPath formatter = new FormatPath(path);
+
+            System.out.println("Path found(canonical form): " + formatter.computeCanonicalForm());
+            System.out.println("Path found(factorized form): " + formatter.computeFactorizedForm());
 
         } catch (Exception e) {
             System.err.println("/!\\ An unexpected error has occurred: " + e.getMessage());

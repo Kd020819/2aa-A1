@@ -40,6 +40,7 @@ public class Solver {
                 position[1] = col;
                 path.add('F');
                 
+                
                 //System.out.println("Move forward");
             } else {
                 //System.out.println("Cannot Move forward");
@@ -63,6 +64,7 @@ public class Solver {
                 }
             }
             path.add('R');
+
         }
 
         public void turnLeft() {
@@ -82,6 +84,7 @@ public class Solver {
                 }
             }
             path.add('L');
+
         }
     
         public List<Character> getPath() {
