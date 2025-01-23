@@ -16,7 +16,7 @@ public class Solver {
         public MazeExplorer(Maze maze) {
             this.maze = maze;
             this.position = maze.getEntry();
-            this.orientation = 'S'; // Start facing South
+            this.orientation = 'E'; // Start facing East
             this.path = new ArrayList<>();
         }
 
@@ -35,34 +35,55 @@ public class Solver {
                 case 'W': col--; break;
             }
 
-            if (maze.isWalkable(row, col)) {
+            if (maze.isWalkable(position)) {
                 position[0] = row;
                 position[1] = col;
                 path.add('F');
+                
+                //System.out.println("Move forward");
             } else {
+                //System.out.println("Cannot Move forward");
                 throw new IllegalArgumentException("Cannot move forward into a wall");
             }
         }
 
-        public void turnLeft() {
-            orientation = Maze.DIRECTIONS[(getDirectionIndex() + 3) % 4]; // Counterclockwise
-            path.add('L');
-        }
-
         public void turnRight() {
-            orientation = Maze.DIRECTIONS[(getDirectionIndex() + 1) % 4]; // Clockwise
+            switch (orientation) {
+                case 'N' -> {
+                    orientation = 'E';
+                }
+                case 'S' -> {
+                    orientation = 'W';
+                }
+                case 'W' -> {
+                    orientation = 'N';
+                }
+                case 'E' -> {
+                    orientation = 'S';
+                }
+            }
             path.add('R');
         }
 
-        private int getDirectionIndex() {
-            for (int i = 0; i < Maze.DIRECTIONS.length; i++) {
-                if (Maze.DIRECTIONS[i] == orientation) {
-                    return i;
+        public void turnLeft() {
+            
+            switch (orientation) {
+                case 'N' -> {
+                    orientation = 'W';
+                }
+                case 'S' -> {
+                    orientation = 'E';
+                }
+                case 'W' -> {
+                    orientation = 'S';
+                }
+                case 'E' -> {
+                    orientation = 'N';
                 }
             }
-            throw new IllegalStateException("Invalid orientation");
+            path.add('L');
         }
-
+    
         public List<Character> getPath() {
             return path;
         }

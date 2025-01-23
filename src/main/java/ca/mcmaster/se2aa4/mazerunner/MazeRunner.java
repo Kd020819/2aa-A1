@@ -13,7 +13,7 @@ public class MazeRunner {
         private int[] entry;
         private int[] exit;
 
-        public static final char[] DIRECTIONS = {'N', 'E', 'S', 'W'};
+        public static final char[] DIRECTIONS = {'N', 'S', 'W','E'};
 
         public Maze(char[][] grid) {
             this.grid = grid;
@@ -35,12 +35,12 @@ public class MazeRunner {
 
         private int[] findEntry() {
             for (int row = 0; row < grid.length; row++) {
+                System.out.println(grid[row][0]);
                 if (grid[row][0] == ' ') {
                     return new int[]{row,0};
                 }
             }
             throw new IllegalArgumentException("No entry point found");
-        
         }
 
         private int[] findExit() {
@@ -53,7 +53,9 @@ public class MazeRunner {
             throw new IllegalArgumentException("No exit point found");
         }
 
-        public boolean isWalkable(int row, int col) {
+        public boolean isWalkable(int[] pos) {
+            int row = pos[0];
+            int col = pos[1];
             return row >= 0 && row < grid.length && col >= 0 && col < grid[0].length && grid[row][col] == ' ';
         }
 

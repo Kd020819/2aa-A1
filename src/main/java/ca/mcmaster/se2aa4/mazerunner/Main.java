@@ -1,16 +1,16 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-
 import org.apache.commons.cli.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class Main {
+import ca.mcmaster.se2aa4.mazerunner.MazeRunner.Maze;
+import ca.mcmaster.se2aa4.mazerunner.SimpleSolver.SimpleMazeExplorer;
+import ca.mcmaster.se2aa4.mazerunner.Solver.MazeExplorer;
 
-    private static final Logger logger = LogManager.getLogger();
+
+    
+public class Main {
 
     public static void main(String[] args) {
         System.out.println("** Starting Maze Runner");
@@ -27,9 +27,12 @@ public class Main {
             // Get the file path from the -i flag
             String inputFilePath = cmd.getOptionValue("i");
             System.out.println("**** Reading the maze from file " + inputFilePath);
+            Maze maze = Maze.fromFile(inputFilePath);
 
             // Process the maze file
-            processMaze(inputFilePath);
+            MazeExplorer explorer = new SimpleMazeExplorer(maze);
+            explorer.explore();
+            System.out.println("Path found: " + explorer.getPath());
 
         } catch (Exception e) {
             System.err.println("/!\\ An unexpected error has occurred: " + e.getMessage());
@@ -40,21 +43,5 @@ public class Main {
         System.out.println("** End of Maze Runner");
     }
 
-    private static void processMaze(String filePath) {
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                
-                if (line.charAt(0) == ' ') {
-                    System.out.print(line.charAt(0));
-                    System.out.print("Entrance");
-                } 
-                
-                System.out.print(System.lineSeparator());
-                
-            }
-        } catch (Exception e) {
-            System.err.println("/!\\ An error occurred while reading the maze file: " + e.getMessage());
-        }
-    }
+    
 }
