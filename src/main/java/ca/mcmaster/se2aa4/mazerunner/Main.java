@@ -37,9 +37,6 @@ public class Main {
         } catch (Exception e) {
             System.err.println("/!\\ An unexpected error has occurred: " + e.getMessage());
         }
-
-        System.out.println("**** Computing path");
-        System.out.println("PATH NOT COMPUTED");
         System.out.println("** End of Maze Runner");
     }
 

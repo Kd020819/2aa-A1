@@ -24,11 +24,6 @@ public class SimpleSolver {
                     // Restore orientation and try moving forward
                     turnLeft(); // Undo the turnRight
                     if (maze.isWalkable(nextPosition())) {
-                        if(position[0] == 4 && position[1] == 3){
-                            System.out.print(nextPosition()[0]);
-                            System.out.println(nextPosition()[1]);
-                            System.out.println();
-                        }
                         moveForward();
                     } else {
                         // Check if turning left is possible

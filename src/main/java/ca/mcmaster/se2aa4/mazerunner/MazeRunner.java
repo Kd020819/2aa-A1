@@ -13,7 +13,7 @@ public class MazeRunner {
         private int[] entry;
         private int[] exit;
 
-        public static final char[] DIRECTIONS = {'N', 'S', 'W','E'};
+        //public static final char[] DIRECTIONS = {'N', 'S', 'W','E'};
 
         public Maze(char[][] grid) {
             this.grid = grid;
@@ -35,7 +35,7 @@ public class MazeRunner {
 
         private int[] findEntry() {
             for (int row = 0; row < grid.length; row++) {
-                System.out.println(grid[row][0]);
+                //System.out.println(grid[row][0]);
                 if (grid[row][0] == ' ') {
                     return new int[]{row,0};
                 }
