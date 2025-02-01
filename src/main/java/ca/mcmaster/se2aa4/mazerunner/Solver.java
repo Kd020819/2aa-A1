@@ -22,6 +22,7 @@ public class Solver {
 
         // Abstract method to define exploration strategy
         public abstract void explore();
+        public abstract Boolean isValidPath(FormatPath path);
 
         // Helper methods for movement
         public void moveForward() {

@@ -17,13 +17,16 @@ public class SimpleSolver {
 
         @Override
         public void explore() {
+            System.out.print(position[0]);
+            System.out.print(position[1]);
+            System.out.println(orientation);
             while (!Arrays.equals(position, maze.getExit())) {
                 // Check if turning right is possible
                 turnRight();
-                path.add('R');
+                //path.add('R');
                 if (maze.isWalkable(nextPosition())) {
                     moveForward();
-                    path.add('F');
+                    //path.add('F');
                 } else {
                     // Restore orientation and try moving forward
                     turnLeft(); // Undo the turnRight
@@ -47,13 +50,46 @@ public class SimpleSolver {
                 System.out.print(position[0]);
                 System.out.print(position[1]);
                 System.out.println(orientation);
-                try {
-                    Thread.sleep(1000);
-                  } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
-                }
+                // try {
+                //     Thread.sleep(1000);
+                //   } catch (InterruptedException e) {
+                //     Thread.currentThread().interrupt();
+                // }
 
             }
+        }
+
+        public Boolean isValidPath(FormatPath path){
+            int[] pos = maze.getEntry();
+            if (pos == null) {
+                throw new IllegalArgumentException("Maze must have a start position");
+            }
+
+            for (char c : path.getPathSteps()){
+                switch(c){
+                    case 'F' ->{
+                    
+                        moveForward();
+                        if (!maze.isWalkable(pos)){
+                            return false;
+                        }
+                    }
+                    case 'R' ->{
+                 
+                        turnRight();
+                    }
+                    case 'L' ->{
+             
+                        turnLeft();
+                    }
+                }
+                System.out.print(position[0]);
+                System.out.print(position[1]);
+                System.out.println(orientation);
+
+            }
+
+            return Arrays.equals(pos,maze.getExit());
         }
         
         private int[] nextPosition() {

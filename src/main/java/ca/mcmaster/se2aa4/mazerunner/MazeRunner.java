@@ -2,7 +2,7 @@ package ca.mcmaster.se2aa4.mazerunner;
 
 import java.io.*;
 import java.util.*;
-
+import ca.mcmaster.se2aa4.mazerunner.Solver.MazeExplorer;
 
 
 public class MazeRunner {
