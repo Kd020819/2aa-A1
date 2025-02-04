@@ -2,8 +2,6 @@ package ca.mcmaster.se2aa4.mazerunner;
 
 import java.io.*;
 import java.util.*;
-import ca.mcmaster.se2aa4.mazerunner.Solver.MazeExplorer;
-
 
 public class MazeRunner {
 
@@ -13,7 +11,6 @@ public class MazeRunner {
         private int[] entry;
         private int[] exit;
 
-        //public static final char[] DIRECTIONS = {'N', 'S', 'W','E'};
 
         public Maze(char[][] grid) {
             this.grid = grid;

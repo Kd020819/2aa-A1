@@ -12,14 +12,14 @@ public class FormatPath {
         for (Character c : expanded.toCharArray()) {
             if (c != ' ') {
                 if (c != 'F' && c != 'L' && c != 'R') {
-                    throw new IllegalArgumentException("Instruction '" + c + "' is invalid. Must be 'F', 'L', or 'R'.");
+                    throw new IllegalArgumentException("Must be 'F', 'L', or 'R'.");
                 }
                 path.add(c);
             }
         }
     }
 
-    public List<Character> getPathSteps() {
+    public List<Character> getSteps() {
         return new ArrayList<>(this.path);
     }
 
@@ -31,17 +31,13 @@ public class FormatPath {
             char c = factorized.charAt(i);
 
             if (Character.isDigit(c)) {
-                // If it's a digit, accumulate the factor
                 currentCommand.append(c);
             } else if (Character.isLetter(c)) {
-                // If it's a letter, process the command
                 if (currentCommand.length() > 0) {
-                    // Repeat the command based on the accumulated factor
                     int repeatCount = Integer.parseInt(currentCommand.toString());
                     canonical.append(String.valueOf(c).repeat(repeatCount));
-                    currentCommand.setLength(0); // Reset the command
+                    currentCommand.setLength(0); 
                 } else {
-                    // Append the command as-is
                     canonical.append(c);
                 }
             }
@@ -70,7 +66,6 @@ public class FormatPath {
                 count = 1;
             }
         }
-        // Append the last sequence
         factorized.append(count > 1 ? count : "").append(path.get(path.size() - 1));
 
         return factorized.toString();

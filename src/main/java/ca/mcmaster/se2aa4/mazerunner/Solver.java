@@ -12,7 +12,6 @@ public class Solver {
         protected char orientation;
         protected List<Character> path;
 
-        // Constructor
         public MazeExplorer(Maze maze) {
             this.maze = maze;
             this.position = maze.getEntry();
@@ -20,7 +19,6 @@ public class Solver {
             this.path = new ArrayList<>();
         }
 
-        // Abstract method to define exploration strategy
         public abstract void explore();
         public abstract Boolean isValidPath(FormatPath path);
 

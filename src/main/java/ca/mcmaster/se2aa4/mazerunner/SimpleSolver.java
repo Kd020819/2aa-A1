@@ -6,7 +6,6 @@ import java.util.concurrent.TimeUnit;
 
 import ca.mcmaster.se2aa4.mazerunner.MazeRunner.Maze;
 import ca.mcmaster.se2aa4.mazerunner.Solver.MazeExplorer;
-import ca.mcmaster.se2aa4.mazerunner.FormatPath;
 
 public class SimpleSolver {
      public static class SimpleMazeExplorer extends MazeExplorer {
@@ -17,9 +16,9 @@ public class SimpleSolver {
 
         @Override
         public void explore() {
-            System.out.print(position[0]);
-            System.out.print(position[1]);
-            System.out.println(orientation);
+            // System.out.print(position[0]);
+            // System.out.print(position[1]);
+            // System.out.println(orientation);
             while (!Arrays.equals(position, maze.getExit())) {
                 // Check if turning right is possible
                 turnRight();
@@ -47,9 +46,9 @@ public class SimpleSolver {
                         }
                     }
                 }
-                System.out.print(position[0]);
-                System.out.print(position[1]);
-                System.out.println(orientation);
+                // System.out.print(position[0]);
+                // System.out.print(position[1]);
+                // System.out.println(orientation);
                 // try {
                 //     Thread.sleep(1000);
                 //   } catch (InterruptedException e) {
@@ -65,10 +64,9 @@ public class SimpleSolver {
                 throw new IllegalArgumentException("Maze must have a start position");
             }
 
-            for (char c : path.getPathSteps()){
+            for (char c : path.getSteps()){
                 switch(c){
                     case 'F' ->{
-                    
                         moveForward();
                         if (!maze.isWalkable(pos)){
                             return false;
@@ -83,10 +81,9 @@ public class SimpleSolver {
                         turnLeft();
                     }
                 }
-                System.out.print(position[0]);
-                System.out.print(position[1]);
-                System.out.println(orientation);
-
+                // System.out.print(position[0]);
+                // System.out.print(position[1]);
+                // System.out.println(orientation);
             }
 
             return Arrays.equals(pos,maze.getExit());

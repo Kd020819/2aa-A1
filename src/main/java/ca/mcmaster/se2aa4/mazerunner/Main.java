@@ -21,7 +21,6 @@ public class Main {
         options.addOption("i", true, "Input file for the maze");
         options.addOption("p", true, "Validating path for the maze");
 
-        // Parse command-line arguments
         CommandLineParser parser = new DefaultParser();
         CommandLine cmd;
 
@@ -39,7 +38,7 @@ public class Main {
                 List<Character> ValidatePath = new ArrayList<>();
                 String path = cmd.getOptionValue("p");
 
-                System.out.println("**** Validating path " + path);
+                System.out.println("**** Validating path ");
 
                 for (char c : path.toCharArray()) {
                     ValidatePath.add(c);
@@ -55,7 +54,7 @@ public class Main {
             }
 
             // Process the maze file
-            System.out.println("================== Finding paths ===============");
+            //System.out.println("================== Finding paths ===============");
             Maze maze_solver = Maze.fromFile(inputFilePath);
             MazeExplorer explorer = new SimpleMazeExplorer(maze_solver);
             explorer.explore();
