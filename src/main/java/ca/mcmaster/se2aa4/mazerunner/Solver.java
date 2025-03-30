@@ -26,27 +26,25 @@ public class Solver {
         public void moveForward() {
             int row = position[0];
             int col = position[1];
-
+        
             switch (orientation) {
                 case 'N': row--; break;
                 case 'E': col++; break;
                 case 'S': row++; break;
                 case 'W': col--; break;
             }
-
-            if (maze.isWalkable(position)) {
+        
+            int[] nextPos = new int[]{row, col};
+        
+            if (maze.isWalkable(nextPos)) {
                 position[0] = row;
                 position[1] = col;
                 path.add('F');
-                
-                
-                //System.out.println("Move forward");
             } else {
-                //System.out.println("Cannot Move forward");
                 throw new IllegalArgumentException("Cannot move forward into a wall");
             }
         }
-
+        
         public void turnRight() {
             switch (orientation) {
                 case 'N' -> {
