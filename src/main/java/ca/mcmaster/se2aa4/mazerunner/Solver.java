@@ -19,7 +19,15 @@ public class Solver {
             this.path = new ArrayList<>();
         }
 
-        public abstract void explore();
+        // Template method (fixed structure)
+        public final void explore() {
+            while (!Arrays.equals(position, maze.getExit())) {
+                makeNextMove(); // Hook method
+            }
+        }
+
+        // Hook method to be implemented by subclasses
+        protected abstract void makeNextMove();
         public abstract Boolean isValidPath(FormatPath path);
 
         // Helper methods for movement

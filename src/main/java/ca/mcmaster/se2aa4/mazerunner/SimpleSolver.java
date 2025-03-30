@@ -15,78 +15,41 @@ public class SimpleSolver {
         }
 
         @Override
-        public void explore() {
-            // System.out.print(position[0]);
-            // System.out.print(position[1]);
-            // System.out.println(orientation);
-            while (!Arrays.equals(position, maze.getExit())) {
-                // Check if turning right is possible
-                turnRight();
-                //path.add('R');
+        protected void makeNextMove() {
+            turnRight();
+            if (maze.isWalkable(nextPosition())) {
+                moveForward();
+            } else {
+                turnLeft(); // undo right
                 if (maze.isWalkable(nextPosition())) {
                     moveForward();
-                    //path.add('F');
                 } else {
-                    // Restore orientation and try moving forward
-                    turnLeft(); // Undo the turnRight
-
+                    turnLeft();
                     if (maze.isWalkable(nextPosition())) {
                         moveForward();
-
                     } else {
-                        // Check if turning left is possible
-                        turnLeft();
-                        if (maze.isWalkable(nextPosition())) {
-                            moveForward();
-                        } else {
-                            // Turn around (180 degrees) if no other options
-                            turnRight(); //undo turnleft 
-                            turnRight();
-                            turnRight();
-                        }
+                        // 180-degree turn
+                        turnRight(); // undo left
+                        turnRight();
+                        turnRight();
                     }
                 }
-                // System.out.print(position[0]);
-                // System.out.print(position[1]);
-                // System.out.println(orientation);
-                // try {
-                //     Thread.sleep(1000);
-                //   } catch (InterruptedException e) {
-                //     Thread.currentThread().interrupt();
-                // }
-
             }
         }
 
+
         public Boolean isValidPath(FormatPath path){
-            int[] pos = maze.getEntry();
-            if (pos == null) {
-                throw new IllegalArgumentException("Maze must have a start position");
-            }
+            // Reset position and orientation
+            this.position = maze.getEntry().clone();
+            this.orientation = 'E';
+            this.path.clear();  // Clear any previous path history
 
-            for (char c : path.getSteps()){
-                switch(c){
-                    case 'F' ->{
-                        moveForward();
-                        if (!maze.isWalkable(pos)){
-                            return false;
-                        }
-                    }
-                    case 'R' ->{
-                 
-                        turnRight();
-                    }
-                    case 'L' ->{
-             
-                        turnLeft();
-                    }
-                }
-                // System.out.print(position[0]);
-                // System.out.print(position[1]);
-                // System.out.println(orientation);
+            try {
+                PathExecutor.execute(path, this);
+                return Arrays.equals(this.position, maze.getExit());
+            } catch (IllegalArgumentException e) {
+                return false;
             }
-
-            return Arrays.equals(pos,maze.getExit());
         }
         
         private int[] nextPosition() {

@@ -51,7 +51,7 @@ public class Main {
                 }else{
                     System.out.println("incorrect path");
                 }
-            }
+            }else{
 
             // Process the maze file
             //System.out.println("================== Finding paths ===============");
@@ -63,6 +63,7 @@ public class Main {
 
             System.out.println("Path found(canonical form): " + formatter.computeCanonicalForm());
             System.out.println("Path found(factorized form): " + formatter.computeFactorizedForm());
+            }
 
         } catch (Exception e) {
             System.err.println("/!\\ An unexpected error has occurred: " + e.getMessage());

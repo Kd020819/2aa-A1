@@ -1,6 +1,8 @@
 package ca.mcmaster.se2aa4.mazerunner;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import ca.mcmaster.se2aa4.mazerunner.ForwardCommand;
 
 public class FormatPath {
     private final List<Character> path = new ArrayList<>();
@@ -22,6 +24,8 @@ public class FormatPath {
     public List<Character> getSteps() {
         return new ArrayList<>(this.path);
     }
+
+    
 
     public String factorizedToCanonical(String factorized) {
         StringBuilder canonical = new StringBuilder();
